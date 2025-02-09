@@ -45,10 +45,10 @@ def point_WLS( W_sum, W_mean_x, W_mean_y, W_var_xx, W_cov_yx, x ):
 
 	return out
 
-# %%
 x_in = np.random.uniform(0, 100, 100)
 y_in = 4 - 0.2*x_in + 0.002*x_in**2
-x_out = np.arange(0, 100, 10, dtype='d')
+# x_out = np.arange(0, 100, 10, dtype='d')
+x_out = np.array([60.0])
 # %%
 plt.scatter(x_in, y_in)
 
@@ -60,7 +60,7 @@ x_out = np.sort(x_out)
 
 len_out = x_out.shape[0]
 len_in = x_sort.shape[0]
-q = 100 
+q = 20
 
 
 # %%
@@ -73,8 +73,8 @@ for i in range(len_out):
 
 	for j in range(len_in):
 
-		x_dist[j] = np.abs(x_out[i] - x_sort[j])
-		x_W[j] = triweight(x_dist[j]/q)
+		x_dist[j] = np.abs(x_out[i] - x_sort[j])/q
+		x_W[j] = triweight(x_dist[j])
 
 		W_sum += x_W[j]
 
@@ -96,6 +96,39 @@ for i in range(len_out):
 plt.scatter(x_out, y_out)
 plt.scatter(x_sort, y_sort)
 
+# %%
+X = np.empty([x_sort.shape[0], 3])
+X[:, 0] = 1
+X[:, 1] = x_sort
+X[:, 2] = x_sort**2
+# %%
+XX = X.T.dot(X)
+XY= X.T.dot(y_sort)
+B = np.linalg.inv(XX).dot(XY)
+# %%
+output = B[0] + B[1]*60 + B[2]*60**2
+output
+
+# %%
+4 - 60*0.2 +0.002*60**2
+# %%
+W = np.diag(x_W)
+XWX = X.T.dot(W).dot(X)
+XWY = X.T.dot(W).dot(y_sort)
+# %%
+Bw = np.linalg.inv(XWX).dot(XWY)
+# %%
+output = Bw[0] + Bw[1]*60 + Bw[2]*60**2
+output
+# %%
+XW = X.copy()
+
+for i in range(X.shape[0]):
+	XW[i]*=x_W[i]
+
+XWX = XW.T.dot(X)
+XWY = XW.T.dot(y_sort)
+
 
 
 
@@ -106,5 +139,4 @@ def local_poly(y_in, x_in, q):
 	x_sort = np.sort(x_in)
 	y_sort = y_in[x_in.argsort()]
 	
-	x_out = 
 
