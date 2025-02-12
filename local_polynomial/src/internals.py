@@ -22,13 +22,13 @@ def point_WLS( W_sum, W_mean_x, W_mean_y, W_var_xx, W_cov_yx, x ):
 	return out
 
 # %%
-def point_poly_WLS(x_in, y_in, w_in, point_x, poly:int=1):
+def point_poly_WLS(x_in, y_in, w_in, point_x, degree:int=1):
 
 	W = np.diag(w_in)
-	X = np.empty([x_in.shape[0], poly+1])
+	X = np.empty([x_in.shape[0], degree+1])
 
 	X[:, 0] = 1
-	for i in range(poly):
+	for i in range(degree):
 		X[:, i+1] = x_in**(i+1)
 
 	XWX = X.T.dot(W).dot(X)
@@ -37,7 +37,7 @@ def point_poly_WLS(x_in, y_in, w_in, point_x, poly:int=1):
 
 	y_point_out = Bw[0]
 
-	for i in range(poly):
+	for i in range(degree):
 		y_point_out += Bw[i+1]*point_x**(i+1)
 	
 	return y_point_out
