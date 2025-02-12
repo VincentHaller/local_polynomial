@@ -32,7 +32,7 @@ def local_polynomial(
 	y_out = np.empty_like(x_out, dtype='d')
 
 	if w_in is None:
-		w_in = np.ones_like(x_in, dtype='d')
+		w_sort = np.ones_like(x_in, dtype='d')
 	else:
 		w_sort = w_in[arr_sort]
 	
