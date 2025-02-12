@@ -33,12 +33,14 @@ def local_polynomial(
 
 	if w_in is None:
 		w_in = np.ones_like(x_in, dtype='d')
+	else:
+		w_sort = w_in[arr_sort]
 	
 	x_W = np.empty_like(x_in, dtype='d')
 
 	for i in range(x_out.shape[0]):
 		for j in range(x_sort.shape[0]):
-			x_W[j] = triweight(np.abs(x_out[i] - x_sort[j])/q) * w_in[j]
+			x_W[j] = triweight(np.abs(x_out[i] - x_sort[j])/q) * w_sort[j]
 		
 		y_out[i] = point_poly_WLS(
 			x_in=x_sort,
