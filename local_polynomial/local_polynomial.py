@@ -1,6 +1,6 @@
 # %%
 import numpy as np 
-from src.internals import triweight, point_poly_WLS
+from local_polynomial.src.internals import triweight, point_poly_WLS
 
 # %%
 def local_polynomial(
@@ -10,9 +10,21 @@ def local_polynomial(
 	q:float, 
 	w_in:np.array=None, 
 	degree:int=0
+)->np.array:
+	"""
+	Local polynomial estimation.
 
-	
-):
+	Args:
+		x_in (np.array): X values in.
+		y_in (np.array): Y values in.
+		x_out (np.array): X values out.
+		q (float): Kernel size.
+		w_in (np.array, optional): Additional weighting to be applied to x_in. Defaults to None.
+		degree (int, optional): Degree of polynomial. Defaults to 0.
+
+	Returns:
+		np.array: Y values out.
+	"""
 	arr_sort = x_in.argsort()
 	x_sort = x_in[arr_sort]
 	y_sort = y_in[arr_sort]

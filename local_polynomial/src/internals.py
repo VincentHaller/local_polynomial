@@ -2,7 +2,16 @@
 import numpy as np 
 
 # %%
-def triweight(value:float):
+def triweight(value:float)->float:
+	"""
+	Triweight kernel.
+
+	Args:
+		value (float): Input value.
+
+	Returns:
+		float: Output value.
+	"""	
 	if value >= 1.0:
 		return 0.0
 	elif value <= 0.0:
@@ -10,20 +19,24 @@ def triweight(value:float):
 	else:
 		return (1 - value**3)**3
 
-# %%
-def point_WLS( W_sum, W_mean_x, W_mean_y, W_var_xx, W_cov_yx, x ):
-
-	b_1_num = W_cov_yx - (W_mean_x*W_mean_y*W_sum)
-	b_1_den = W_var_xx - (W_mean_x*W_mean_x*W_sum)
-	b_1 = b_1_num/b_1_den
-	b_0 = W_mean_y - b_1*W_mean_x
-	out = b_0 + b_1*x
-
-	return out
 
 # %%
-def point_poly_WLS(x_in, y_in, w_in, point_x, degree:int=1):
+def point_poly_WLS(
+	x_in:np.array, y_in:np.array, w_in:np.array, point_x:float, degree:int
+	)->float:
+	"""
+	Performs a point output for a polynomial WLS.
 
+	Args:
+		x_in (np.array): X values in.
+		y_in (np.array): Y values in.
+		w_in (np.array): Weights in.
+		point_x (float): Point of output.
+		degree (int, optional): Degree of polynomial.
+
+	Returns:
+		float: Point output.
+	"""
 	W = np.diag(w_in)
 	X = np.empty([x_in.shape[0], degree+1])
 
