@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "local-polynomial"
-version = "0.1.0"
+version = "0.1.1a0"
 description = "Local polynomial packaging"
 authors = ["VincentHaller <vincenthaller2@gmail.com>"]
 license = "MIT"
@@ -8,14 +8,14 @@ readme = "README.md"
 packages = [{include = "local_polynomial"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
-numpy = "^2.2.2"
+python = ">=3.9"
+numpy = ">=1.23"
 pandas = "^2.2.3"
 
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
-matplotlib = "^3.10.0"
+matplotlib = ">=3.9.0"
 plotly = "^6.0.0"
 
 [build-system]
