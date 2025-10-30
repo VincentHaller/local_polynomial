@@ -1,23 +1,23 @@
-[tool.poetry]
+[project]
 name = "local-polynomial"
-version = "0.1.1a3"
-description = "Local polynomial packaging"
-authors = ["VincentHaller <vincenthaller2@gmail.com>"]
-license = "MIT"
+version = "0.2.0"
+description = "Fast Local Polynomial functions"
 readme = "README.md"
-packages = [{include = "local_polynomial"}]
+requires-python = ">=3.12"
 
-[tool.poetry.dependencies]
-python = ">=3.9"
-numpy = ">=1.23"
-pandas = "^2.2.3"
+dependencies = [
+    "cython>=3.1.6",
+    "numpy>=2.3.4",
+    "pandas>=2.3.3",
+]
 
-
-[tool.poetry.group.dev.dependencies]
-ipykernel = "^6.29.5"
-matplotlib = ">=3.9.0"
-plotly = "^6.0.0"
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "matplotlib>=3.10.7",
+    "plotly>=6.3.1",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
