@@ -1,3 +1,4 @@
+
 double point_WLS(
 	double W_sum, 
 	double W_mean_x,
@@ -33,8 +34,8 @@ double triweight(double value)
 }
 
 void kernel_s_e(
-	int *k_s, int *k_e, 
-	int n, int i, int data_len, char *has_value
+	long *k_s, long *k_e, 
+	long n, long i, long data_len, char *has_value
 )
 {
 	long k_w_s, k_w_e, vc;
@@ -48,10 +49,12 @@ void kernel_s_e(
 	{
 		vc = 0;
 
-		*k_s = max(i-k_w_s, 0);
-		*k_e = min(i+1+k_w_e, data_len);
+		// *k_s = max(i-k_w_s, 0);
+		// *k_e = min(i+1+k_w_e, data_len);
+		*k_s = i-k_w_s > 0 ? i-k_w_s : 0;
+		*k_e = i+1+k_w_e < data_len ? i+k_w_e+1 : data_len;
 
-		for (int j = *k_s; j < *k_e; j++)
+		for (long j = *k_s; j < *k_e; j++)
 			vc += has_value[j];
 	}
 
@@ -60,11 +63,13 @@ void kernel_s_e(
 
 
 void asy_kernel_s_e(
-	int *k_s, int *k_e, 
-	int n, int i, int data_len, char *has_value
+	long *k_s, long *k_e, 
+	long n, long i, long data_len, char *has_value
 )
 {
 	long k_w_s, k_w_e, vc;
+	vc = 0;
+
 	for (
 		k_w_s = n-1, k_w_e = 0;
 		vc < n;
@@ -73,10 +78,12 @@ void asy_kernel_s_e(
 	{
 		vc = 0;
 
-		k_s = max(i-k_w_s, 0);
-		k_e = min(i+1+k_w_e, data_len);
+		// *k_s = max(i-k_w_s, 0);
+		// *k_e = min(i+1+k_w_e, data_len);
+		*k_s = i-k_w_s > 0 ? i-k_w_s : 0;
+		*k_e = i+1+k_w_e < data_len ? i+k_w_e+1 : data_len;
 
-		for (j = *k_s; j < *k_e; j++ )
+		for (long j = *k_s; j < *k_e; j++ )
 			vc += has_value[j];
 
 		if ( *k_s == 0)

@@ -4,6 +4,8 @@
 
 // declares 
 	// In header file.
+#define max(a, b) ((a) > (b) ? (a) : (b))
+#define min(a, b) ((a) < (b) ? (a) : (b))
 
 // functions
 long c_loess(
@@ -11,7 +13,7 @@ long c_loess(
 	double *y_in,
 	long data_len,
 	long q,
-	long asymmetric,
+	long asymmetric
 )
 {
 	long i, j, m, n, p_n, count_nan;
@@ -57,7 +59,7 @@ long c_loess(
 	y_x = (double*)malloc(p_n *sizeof(double));
 	x_x = (double*)malloc(p_n *sizeof(double));
 
-	for ( i = 0, j = 0, i < data_len; i++ )
+	for ( i = 0, j = 0; i < data_len; i++ )
 	{
 		if (has_value[i] == 1)
 		{
