@@ -16,7 +16,7 @@ cdef extern from "C_code/c_loess.h":
 
 @cython.boundscheck(False)
 @cython.cdivision(True)
-cpdef loess(
+cpdef cy_loess(
 	double[:] y_in,
 	int q,
 	int asymmetric

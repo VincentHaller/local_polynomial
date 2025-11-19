@@ -98,6 +98,7 @@ long c_loess(
 		for ( j = 0; j < k_e; j++ )
 			k_w_e_j += has_value[j];
 
+
 		for ( j = k_w_s_j; j < k_w_e_j; j++ )
 		{
 			W = fabs(x[j] - i);
@@ -111,6 +112,9 @@ long c_loess(
 			W_var_xx += W*x_x[j];
 			W_cov_yx += W*y_x[j];
 		}
+
+		W_mean_x /= W_sum;
+		W_mean_y /= W_sum;
 
 		y_out[i] = point_WLS(
 			W_sum, 

@@ -49,8 +49,6 @@ void kernel_s_e(
 	{
 		vc = 0;
 
-		// *k_s = max(i-k_w_s, 0);
-		// *k_e = min(i+1+k_w_e, data_len);
 		*k_s = i-k_w_s > 0 ? i-k_w_s : 0;
 		*k_e = i+1+k_w_e < data_len ? i+k_w_e+1 : data_len;
 
@@ -78,8 +76,6 @@ void asy_kernel_s_e(
 	{
 		vc = 0;
 
-		// *k_s = max(i-k_w_s, 0);
-		// *k_e = min(i+1+k_w_e, data_len);
 		*k_s = i-k_w_s > 0 ? i-k_w_s : 0;
 		*k_e = i+1+k_w_e < data_len ? i+k_w_e+1 : data_len;
 
