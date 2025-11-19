@@ -1,14 +1,22 @@
+[build-system]
+requires = ["setuptools", "wheel", "Cython", "numpy"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "local-polynomial"
-version = "0.2a2"
+version = "0.2"
 description = "Fast Local Polynomial functions"
 readme = "README.md"
 requires-python = ">=3.12"
+authors = [
+	{name = "Vincent Haller", email = "vincenthaller2@gmail.com"}
+]	
 
 dependencies = [
     "cython>=3.1.6",
-    "numpy>=2.3.4",
+    "numpy>=2.3",
     "pandas>=2.3.3",
+    "setuptools>=80.9.0",
 ]
 
 [dependency-groups]
@@ -18,3 +26,16 @@ dev = [
     "plotly>=6.3.1",
 ]
 
+[tool.uv]
+cache-keys = [
+	{ file = "pyproject.toml" }, 
+	{ file = "setup.py" }, 
+	{ file = "local_polynomial/src/C_code/*.c" },
+	]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["local_polynomial*"]
+
+[tool.setuptools.package-data]
+local_polynomial = ["**/*.pyx", "**/*.c", "**/*.h"]
