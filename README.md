@@ -1,6 +1,7 @@
 # local-polynomial
 
 Fast Local Polynomial regression functions implemented in Python with Cython/C extensions for high performance.
+This is a personal, free-time project. 
 
 ## Features
 
@@ -76,6 +77,7 @@ y_smooth = loess(
 ### `local_polynomial`
 
 Performs local polynomial regression using a triweight kernel.
+Does not have C backend yet!
 
 **Parameters:**
 - `x_in` (np.array): Input x-coordinates
@@ -90,6 +92,8 @@ Performs local polynomial regression using a triweight kernel.
 
 **Example:**
 ```python
+from local_polynomial.local_polynomial import local_polynomial
+
 y_out = local_polynomial(
     x_in=x_in,
     y_in=y_in,
@@ -117,6 +121,8 @@ This function uses a C implementation for high performance. The algorithm handle
 
 **Example:**
 ```python
+from local_polynomial.loess import loess 
+
 y_smooth = loess(
     y_in=y_in,
     q=15,
@@ -139,10 +145,8 @@ cd local_polynomial
 uv sync --dev
 ```
 
-3. Build the package:
-```bash
-uv build
-```
+Thats it you can now play around and modify the package!
+
 
 ### Project Structure
 

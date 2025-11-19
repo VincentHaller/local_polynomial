@@ -1,38 +1,26 @@
 # %%
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import cProfile
+
 from local_polynomial.local_polynomial import local_polynomial
 from local_polynomial.loess import loess
 from local_polynomial.src.cy_loess import cy_loess
-import cProfile
 
 # %%
-X = np.linspace(-0.5, 4.2*np.pi, 50)
+X = np.linspace(-0.5, 4.2*np.pi, 800)
 Y = np.sin(X)
 
 # %%
 y_out =  local_polynomial(x_in = X, y_in = Y, x_out = X, q=0.3, degree=1)
+# %%
 y_out_2 = loess(y_in=Y,q=5, asymmetric=False)
 y_out_3 = cy_loess(y_in=Y, q=5, asymmetric=0)
-plt.scatter(X, Y)
-plt.scatter(X, y_out_2)
+# %%
+cProfile.run("local_polynomial(x_in = X, y_in = Y, x_out = X, q=0.3, degree=1)")
+# %%
+cProfile.run("loess(y_in=Y,q=5, asymmetric=False)")
 
 # %%
-y_out_2
-# %%
-y_out_3
-
-# %%
-Y
-
-
-# %%
-y_out.shape
-
-# %%
-X.shape
-# %%
-y_out_2.shape
+cProfile.run("cy_loess(y_in=Y,q=5, asymmetric=0)")
 
 # %%
