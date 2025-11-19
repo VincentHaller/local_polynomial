@@ -26,6 +26,13 @@ dev = [
     "plotly>=6.3.1",
 ]
 
+[tool.uv]
+cache-keys = [
+	{ file = "pyproject.toml" }, 
+	{ file = "setup.py" }, 
+	{ file = "local_polynomial/src/C_code/*.c" },
+	]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["local_polynomial*"]

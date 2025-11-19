@@ -7,9 +7,9 @@ cython_dir = os.path.join("local_polynomial", "src")
 
 extensions = [
 	Extension(
-		"local_polynomial.loess",
+		"local_polynomial.src.cy_loess",
 		[
-			os.path.join(cython_dir, "loess.pyx"),
+			os.path.join(cython_dir, "cy_loess_wrapper.pyx"),
 			os.path.join(cython_dir, "C_code", "c_loess.c"),
 			os.path.join(cython_dir, "C_code", "c_internals.c"),
 		],
