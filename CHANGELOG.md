@@ -8,7 +8,6 @@ All notable changes to this project will be documented in this file.
 - LOESS function (Asymmetric and Symmetric) with C implementation
 
 ### ToDo
-- some strange behavior at beginning of Symmetric LOESS to be fixed. 
 - Unit test implementation. 
 - Local-Poly needs C treatment.
 
